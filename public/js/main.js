@@ -5,7 +5,10 @@ const getinfo = async (event) => {
     const response = await fetch(`api.openweathermap.org/data/2.5/weather?q=Dhaka&units=metric&appid=6fa13157d6ac0e06b56a6309be4edba5`
     )
 
-    console.log(response)
+    const data=response.json()
+    const arr=[data]
+
+    console.log(arr)
 
 }
 
