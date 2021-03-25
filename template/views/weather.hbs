@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Weather App</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                {{>nabvar}}
+            </div>
+
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-10 col-10 mx-auto">
+                    <div class="main-content">
+                        <form class="form-content">
+                            <input type="text" id="cityname" placeholder="Enter City" autocomplete="off">
+                            <input type="submit" value="search" id="submitbtn">
+                        </form>
+
+                    </div>
+                    <br>
+                    <div class="temp-info">
+                        <div class="top-layer">
+
+                        </div>
+                        <div class="main-layer">
+                            <p id='city'>City: </p>
+                            <div class="middle-layer data-hide">
+                                <h1>
+                                    <span id='temp'></span><sup>0</sup> Celcius</>
+                                    <h1 id='temp_status'>
+                                        </>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <br>
+    <br>
+
+    </div>
+
+
+    <script>
+        const cityname = document.getElementById('cityname')
+        const submitbtn = document.getElementById('submitbtn')
+        const city = document.getElementById('city')
+        const temp = document.getElementById('temp')
+        const temp_status = document.getElementById("temp_status")
+
+
+
+        //api fetch functionality
+        //id dhore dhore fetch korte hbe
+        //id dhore dhore fetch korte hobe
+        //id upore dewa ase
+        const getinfo = async (event) => {
+
+            event.preventDefault()
+            //get user typed city name
+            let cityval = cityname.value
+            let url = `http://api.openweathermap.org/data/2.5/weather?q=${cityval}&units=metric&appid=6fa13157d6ac0e06b56a6309be4edba5`
+            const response = await fetch(url)
+            const data = await response.json()
+
+            //data gula ekhn array te nite hbe to get output
+            const arrdata = [data]
+
+            //now get data from api 
+            //html a giye data show hbe
+            //city,temp aigula id ekekta
+            city.innerText = arrdata[0].name
+            temp.innerText = arrdata[0].main.temp
+            temp_status.innerText = arrdata[0].weather[0].description
+
+
+
+            console.log(data)
+
+
+        }
+
+        submitbtn.addEventListener("click", getinfo)
+
+
+
+
+    </script>
+</body>
+
+</html>
